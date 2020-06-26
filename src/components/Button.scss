@@ -1,0 +1,40 @@
+$color: #2963ff;
+
+.button {
+    position: relative;
+    border: none;
+    font-size: 1.2em;
+    padding: 0.6em 2em;
+    background: $color;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.6s ease;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        transform-style: flat;
+        transform: translate3d(-50%, -50%, 0);
+        background: rgba(white, 0.1);
+        border-radius: 100%;
+        transition: width 0.3s ease, height 0.3s ease;
+    }
+
+    &:focus,
+    &:hover {
+        background: darken($color, 7%);
+    }
+
+    &:active {
+        &:after {
+            width: 200px;
+            height: 200px;
+        }
+    }
+}

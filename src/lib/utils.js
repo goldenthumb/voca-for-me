@@ -5,6 +5,10 @@ export function parseHtml(str) {
     return element;
 }
 
+export function convertStringFromElements(elements) {
+    return elements.reduce((acc, ele) => (acc += ele.outerHTML.trim()), '');
+}
+
 export function $(selector, parent) {
     return (parent || document).querySelector(selector);
 }

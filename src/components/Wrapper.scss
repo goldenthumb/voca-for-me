@@ -1,0 +1,15 @@
+.wrapper {
+    font-size: 1em;
+
+    &--center {
+        display: flex;
+        padding: 1.2em 0.8em;
+        justify-content: center;
+    }
+
+    &--space-between {
+        display: flex;
+        padding: 1.2em 0.8em;
+        justify-content: space-between;
+    }
+}
