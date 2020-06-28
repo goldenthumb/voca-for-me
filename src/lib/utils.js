@@ -5,8 +5,12 @@ export function parseHtml(str) {
     return element;
 }
 
-export function convertStringFromElements(elements) {
-    return elements.reduce((acc, ele) => (acc += ele.outerHTML.trim()), '');
+/** @param {HTMLElement[] | HTMLElement | string} children */
+export function stringifyHtml(children) {
+    if (typeof children === 'string') return children;
+    return Array.isArray(children) ? 
+        children.reduce((acc, ele) => (acc += ele.outerHTML.trim()), '') :
+        children.outerHTML.trim();
 }
 
 export function $(selector, parent) {
@@ -20,4 +24,3 @@ export function $$(selector, parent) {
 export function cx(...classList) {
     return classList.filter(Boolean).join(' ');
 }
-

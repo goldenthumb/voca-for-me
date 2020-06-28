@@ -1,7 +1,7 @@
 export const PAGE = { INDEX: 'index', MAIN: 'main', END: 'end' };
 const router = new (class {
     constructor() {
-        this._fn = () => { };
+        this._fn = () => {};
         history.replaceState(null, null, '/');
     }
 
@@ -13,8 +13,8 @@ const router = new (class {
      * @param {'main' | 'end'} page
      * @param {any} [data]
      * */
-    add(page, data) {
-        history.pushState({ page, data }, null, `/?page="${page}"`);
+    move(page, data) {
+        history.pushState({ page, data }, null, `/?page=${page}`);
         this._emit({ page, data });
     }
 

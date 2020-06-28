@@ -1,11 +1,11 @@
-import { parseHtml, cx, convertStringFromElements } from '../lib/utils';
+import { parseHtml, cx, stringifyHtml } from '../lib/utils';
 import './TextBox.scss';
 
 /**
- * @param {{ size?: 'small' | 'large' }} props
- * @param {HTMLElement[]} elements
+ * @param {{ size?: 'small' | 'large' }} [props]
+ * @param {HTMLElement[] | HTMLElement | string} children
  * */
-export default function TextBox({ size, text } = {}, elements = []) {
+export default function TextBox({ size } = {}, children) {
     return parseHtml(`
         <div 
             class="${cx(
@@ -13,7 +13,7 @@ export default function TextBox({ size, text } = {}, elements = []) {
                 size && `text-box--${size}`
             )}" 
         >
-            ${elements.length ? convertStringFromElements(elements) : text}
+            ${stringifyHtml(children)}
         </div>
     `);
 }

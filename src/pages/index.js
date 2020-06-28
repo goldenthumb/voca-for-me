@@ -8,14 +8,14 @@ import Button from '../components/Button.js';
 export default function index($root) {
     $root.appendChild(
         Wrapper({}, [
-            TextBox({ text: '처음 페이지' }),
+            TextBox({}, '처음 페이지'),
             Wrapper({ center: true }, [
-                Button({ id: 'start-btn', text: '메인 페이지로 이동' })
+                Button({ id: 'start-btn' }, '메인 페이지로 이동'),
             ]),
-        ]),
+        ])
     );
 
     $('[data-start-btn]').addEventListener('click', () => {
-        router.add(PAGE.MAIN);
+        router.move(PAGE.MAIN);
     });
 }
