@@ -6,6 +6,7 @@
         "start": "webpack-dev-server --config webpack/devserver.js --hot --open",
         "build": "rimraf public && webpack --config webpack/build",
         "demo": "npm run build && cd public && live-server",
+        "test": "jest --clearCache && jest",
         "lint": "eslint 'src/**/*.js'",
         "lint-fix": "eslint --fix 'src/**/*.js'",
         "precommit-msg": "echo 'Pre-commit checks(lint, test)...' && exit 0"
@@ -48,6 +49,7 @@
         ".history"
     ],
     "dependencies": {
-        "@babel/runtime": "^7.10.2"
+        "@babel/runtime": "^7.10.2",
+        "jest": "^26.1.0"
     }
 }
