@@ -1,13 +1,19 @@
-import { parseHtml, stringifyHtml } from '../lib/utils';
+import { parseHtml, stringifyHtml, cx } from '../lib/utils';
 import './Button.scss';
 
 /**
- * @param {{ id?: string }} [props]
+ * @param {{ id?: string; size?: 'small' | 'large' }} [props]
  * @param {HTMLElement[] | HTMLElement | string} children
  * */
-export default function Button({ id }, children) {
+export default function Button({ id, size }, children) {
     return parseHtml(`
-        <button class="button" ${id ? `data-${id}` : ''}>
+        <button 
+            class="${cx(
+                'button', 
+                size && `button--${size}`
+            )}" 
+            ${id ? `data-${id}` : ''}
+        >
             ${stringifyHtml(children)}
         </button>
     `);

@@ -1,0 +1,22 @@
+@import '../styles/utils';
+
+.app {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel {
+    width: 400px;
+    padding: em(20px) em(20px) em(120px) em(20px);
+    box-sizing: border-box;
+}
+
+.layout {
+    font-size: 1rem;
+}

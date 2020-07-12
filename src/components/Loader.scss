@@ -1,0 +1,95 @@
+@import '../styles/utils';
+
+$color: rgba(158, 158, 158, 0.8);
+
+.loader {
+    position: relative;
+    width: rem(10px);
+    height: rem(10px);
+    border-radius: rem(5px);
+    background-color: $color;
+    color: $color;
+    animation: dot-elastic 1s infinite linear;
+
+    &::before,
+    &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: 0;
+    }
+
+    &::before {
+        left: rem(-15px);
+        width: rem(10px);
+        height: rem(10px);
+        border-radius: rem(5px);
+        background-color: $color;
+        color: $color;
+        animation: dot-elastic-before 1s infinite linear;
+    }
+
+    &::after {
+        left: rem(15px);
+        width: rem(10px);
+        height: rem(10px);
+        border-radius: rem(5px);
+        background-color: $color;
+        color: $color;
+        animation: dot-elastic-after 1s infinite linear;
+    }
+}
+
+@keyframes dot-elastic-before {
+    0% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(1, 1.5);
+    }
+    50% {
+        transform: scale(1, 0.67);
+    }
+    75% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes dot-elastic {
+    0% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1, 1.5);
+    }
+    75% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes dot-elastic-after {
+    0% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1, 0.67);
+    }
+    75% {
+        transform: scale(1, 1.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
