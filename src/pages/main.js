@@ -5,18 +5,21 @@ import Store from '../lib/Store';
 
 import App from '../components/App.js';
 import Wrapper from '../components/Wrapper.js';
-import Text from '../components/Text.js';
-import TextBox from '../components/TextBox.js';
+import HeaderText from '../components/HeaderText.js';
+import WordPanel from '../components/WordPanel.js';
+import Word from '../components/Word.js';
 import Button from '../components/Button.js';
 
 export default async function main($root) {
     $root.appendChild(
         App({}, [
             Wrapper({ spaceBetween: true }, [
-                Wrapper({}, [Text({}, '남은 시간(초) : '), Text({ id: 'left-time' }, '0')]),
-                Wrapper({}, [Text({}, '아는 단어 수 : '), Text({ id: 'score'}, '0')]),
+                Wrapper({}, [HeaderText({}, '남은 시간(초) : '), HeaderText({ id: 'left-time' }, '0')]),
+                Wrapper({}, [HeaderText({}, '아는 단어 수 : '), HeaderText({ id: 'score'}, '0')]),
             ]),
-            TextBox({ id: 'word'}, ''),
+            WordPanel({}, [
+                Word({ id: 'word', loading: true }, ''), Word({ id: 'meaning', size: 'small' }, ''),
+            ]),
             Wrapper({ spaceBetween: true }, [
                 Button({ id: 'index-btn', size: 'small' }, '처음으로 이동'),
                 Button({ id: 'end-btn', size: 'small' }, '알고 있어요'),
@@ -25,30 +28,33 @@ export default async function main($root) {
     );
 
     const $word = $('[data-word]');
+    const $meaning = $('[data-meaning]');
     const $leftTime = $('[data-left-time]');
-    
+
     const leftTimer = new LeftTimer();
     const store = new Store({
+        second: 0,
         selected: 0,
         leftTime: 0,
         words: [],
         solvedWords: [],
     });
 
-    const { words } = await import('../words.js');
-    store.set({ words});
+    const { config: { second, words } } = await import('../../config.js');
+    store.set({ second, words });
 
-    store.on(['selected', 'words'], ({ words, selected, solvedWords }) => {
+    store.on(['selected', 'words'], ({ second, words, selected, solvedWords }) => {
         if (selected >= words.length) {
             store.clear();
             leftTimer.clear();
             router.move(PAGE.END, { solvedWords });
             return;
         }
-
-        const { word, time } = words[selected];
+        
+        const { word, meaning } = words[selected];
         $word.textContent = word;
-        leftTimer.set((leftTime) => store.set({ leftTime }), time);
+        $meaning.textContent = meaning;
+        leftTimer.set((leftTime) => store.set({ leftTime }), second);
     });
 
     store.on(['leftTime'], ({ leftTime, selected }) => {

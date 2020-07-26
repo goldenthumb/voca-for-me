@@ -1,13 +1,13 @@
 import { parseHtml, stringifyHtml } from '../lib/utils';
-import './Text.scss';
+import './HeaderText.scss';
 
 /**
  * @param {{ id?: string }} [props]
  * @param {HTMLElement[] | HTMLElement | string} children
  * */
-export default function Text({ id }, children) {
+export default function HeaderText({ id }, children) {
     return parseHtml(`
-        <span class="text" ${id ? `data-${id}` : ''}>
+        <span class="header-text" ${id ? `data-${id}` : ''}>
             ${stringifyHtml(children)}
         </span>
     `);
