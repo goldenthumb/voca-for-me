@@ -10,7 +10,7 @@ import WordPanel from '../components/WordPanel.js';
 import Word from '../components/Word.js';
 import Button from '../components/Button.js';
 
-export default async function main($root) {
+export default function main($root) {
     $root.appendChild(
         App({}, [
             Wrapper({ spaceBetween: true }, [
@@ -21,15 +21,11 @@ export default async function main($root) {
                 Word({ id: 'word', loading: true }, ''), Word({ id: 'meaning', size: 'small' }, ''),
             ]),
             Wrapper({ spaceBetween: true }, [
-                Button({ id: 'index-btn', size: 'small' }, '처음으로 이동'),
-                Button({ id: 'end-btn', size: 'small' }, '알고 있어요'),
+                Button({ id: 'move-index', size: 'small' }, '처음으로 이동'),
+                Button({ id: 'check-word', size: 'small' }, '알고 있어요'),
             ]),
         ]),
     );
-
-    const $word = $('[data-word]');
-    const $meaning = $('[data-meaning]');
-    const $leftTime = $('[data-left-time]');
 
     const leftTimer = new LeftTimer();
     const store = new Store({
@@ -37,23 +33,25 @@ export default async function main($root) {
         selected: 0,
         leftTime: 0,
         words: [],
-        solvedWords: [],
+        checkedWords: [],
     });
 
-    const { config: { second, words } } = await import('../../config.js');
-    store.set({ second, words });
+    (async () => {
+        const { config: { second, words } } = await import('../../config.js');
+        store.set({ second, words });
+    })();
 
-    store.on(['selected', 'words'], ({ second, words, selected, solvedWords }) => {
+    store.on(['selected', 'words'], ({ second, words, selected, checkedWords }) => {
         if (selected >= words.length) {
             store.clear();
             leftTimer.clear();
-            router.move(PAGE.END, { solvedWords });
+            router.move(PAGE.END, { words, checkedWords });
             return;
         }
         
         const { word, meaning } = words[selected];
-        $word.textContent = word;
-        $meaning.textContent = meaning;
+        $('[data-word]').textContent = word;
+        $('[data-meaning]').textContent = meaning;
         leftTimer.set((leftTime) => store.set({ leftTime }), second);
     });
 
@@ -62,10 +60,26 @@ export default async function main($root) {
             store.set({ selected: selected + 1 });
         }
 
-        $leftTime.textContent = `${leftTime}초`;
+        $('[data-left-time]').textContent = `${leftTime}초`;
     });
 
-    $('[data-index-btn]').addEventListener('click', () => {
+    store.on(['checkedWords'], ({ checkedWords }) => {
+        $('[data-score]').textContent = `${checkedWords.length}`;
+    });
+
+    $('[data-move-index]').addEventListener('click', () => {
         router.back();
+    });
+
+    $('[data-check-word]').addEventListener('click', () => {
+        const { words, selected, checkedWords } = store.state;
+        
+        store.set({
+            selected: selected + 1,
+            checkedWords: [
+                ...checkedWords, 
+                words[selected]
+            ]
+        });
     });
 }
