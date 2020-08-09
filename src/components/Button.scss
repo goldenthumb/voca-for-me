@@ -40,6 +40,11 @@ $color: #2963ff;
         }
     }
 
+    &--disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
     &--small {
         font-size: 0.8em;
     }

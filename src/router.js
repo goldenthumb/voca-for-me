@@ -14,7 +14,7 @@ const router = new (class {
      * @param {any} [data]
      * */
     move(page, data) {
-        history.pushState({ page, data }, null, `/?page=${page}`);
+        history.pushState({ page, data }, null, `/?${page}`);
         this._emit({ page, data });
     }
 

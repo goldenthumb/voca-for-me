@@ -11,8 +11,8 @@ export default function end($root) {
         App({}, [
             Word({}, '종료 페이지'),
             Wrapper({ spaceBetween: true }, [
-                Button({ id: 'index-btn' }, '처음 페이지로 이동'),
-                Button({ id: 'main-btn' }, '메인 페이지로 이동'),
+                Button({ id: 'index-btn', size: 'small' }, '처음으로'),
+                Button({ id: 'main-btn', size: 'small' }, '다시하기'),
             ]),
         ]),
     );

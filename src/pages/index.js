@@ -13,8 +13,9 @@ export default function index($root) {
             WordPanel({}, [
                 Word({ size: 'large' }, '나만의 단어 학습장'),
             ]),
-            Wrapper({ center: true }, [
-                Button({ id: 'start-btn' }, '시작')
+            Wrapper({ spaceBetween: true }, [
+                Button({ id: 'start-btn' }, '학습하기'),
+                Button({ id: 'start-btn', disabled: true }, '문제풀기')
             ])
         ])
     );
