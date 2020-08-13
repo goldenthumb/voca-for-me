@@ -52,6 +52,7 @@ export default function main($root) {
         const { word, meaning } = words[selected];
         $('[data-word]').textContent = word;
         $('[data-meaning]').textContent = meaning;
+        $('[data-score]').textContent = `${checkedWords.length}`;
         leftTimer.set((leftTime) => store.set({ leftTime }), second);
     });
 
@@ -63,7 +64,8 @@ export default function main($root) {
         $('[data-left-time]').textContent = `${leftTime}초`;
     });
 
-    store.on(['checkedWords'], ({ checkedWords }) => {
+    store.on(['checkedWords', 'selected'], ({ selected, words, checkedWords }) => {
+        if (selected >= words.length) return;
         $('[data-score]').textContent = `${checkedWords.length}`;
     });
 
