@@ -2,7 +2,6 @@ export const PAGE = { INDEX: 'index', MAIN: 'main', END: 'end' };
 const router = new (class {
     constructor() {
         this._fn = () => {};
-        history.replaceState(null, null, '/');
     }
 
     getState() {
