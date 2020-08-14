@@ -30,10 +30,6 @@ export const config = {
             meaning: '매우 바쁜 / 매우 혼란스러운'
         },
         {
-            word: 'hectic',
-            meaning: '매우 바쁜 / 매우 혼란스러운'
-        },
-        {
             word: 'cocky',
             meaning: '거만한'
         },

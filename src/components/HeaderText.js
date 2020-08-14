@@ -6,7 +6,7 @@ import './HeaderText.scss';
  * @param {HTMLElement[] | HTMLElement | string} children
  * */
 export default function HeaderText({ id }, children) {
-    return parseHtml(`
+    return parseHtml(/*html*/`
         <span class="header-text" ${id ? `data-${id}` : ''}>
             ${stringifyHtml(children)}
         </span>

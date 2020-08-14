@@ -6,7 +6,7 @@ import './Button.scss';
  * @param {HTMLElement[] | HTMLElement | string} children
  * */
 export default function Button({ id, size, disabled }, children) {
-    return parseHtml(`
+    return parseHtml(/*html*/`
         <button 
             class="${cx(
                 'button',

@@ -6,7 +6,7 @@ import './Wrapper.scss';
  * @param {HTMLElement[] | HTMLElement | string} children
  * */
 export default function Wrapper({ center, spaceBetween } = {}, children) {
-    return parseHtml(`
+    return parseHtml(/*html*/`
         <div 
             class="${cx(
                 'wrapper', 

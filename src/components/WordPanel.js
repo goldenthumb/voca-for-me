@@ -5,7 +5,7 @@ import './WordPanel.scss';
  * @param {HTMLElement[] | HTMLElement | string} children
  * */
 export default function WordPanel({ id } = {}, children) {
-    return parseHtml(`
+    return parseHtml(/*html*/`
         <div class="${cx('word-panel')}" ${id ? `data-${id}` : ''}>
             ${stringifyHtml(children)}
         </div>

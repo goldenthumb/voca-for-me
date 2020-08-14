@@ -11,7 +11,7 @@ import Loader from './Loader';
  * @param {HTMLElement[] | HTMLElement | string} children
  * */
 export default function Word({ id, size = 'normal', loading = false } = {}, children) {
-    return parseHtml(`
+    return parseHtml(/*html*/`
         <div 
             class="${cx(
                 'word', 
