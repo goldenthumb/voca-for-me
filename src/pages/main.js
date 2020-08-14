@@ -1,5 +1,5 @@
 import router, { PAGE } from '../router';
-import { $ } from '../lib/utils';
+import { $, shuffleArray } from '../lib/utils';
 import LeftTimer from '../lib/LeftTimer';
 import Store from '../lib/Store';
 
@@ -38,7 +38,7 @@ export default function main($root) {
 
     (async () => {
         const { config: { second, words } } = await import('../../config.js');
-        store.set({ second, words });
+        store.set({ second, words: shuffleArray(words) });
     })();
 
     store.on(['selected', 'words'], ({ second, words, selected, checkedWords }) => {
@@ -50,17 +50,16 @@ export default function main($root) {
         }
         
         const { word, meaning } = words[selected];
+
         $('[data-word]').textContent = word;
         $('[data-meaning]').textContent = meaning;
         $('[data-score]').textContent = `${checkedWords.length}`;
+
         leftTimer.set((leftTime) => store.set({ leftTime }), second);
     });
 
     store.on(['leftTime'], ({ leftTime, selected }) => {
-        if (leftTime <= 0) {
-            store.set({ selected: selected + 1 });
-        }
-
+        if (leftTime <= 0) store.set({ selected: selected + 1 });
         $('[data-left-time]').textContent = `${leftTime}초`;
     });
 
@@ -69,9 +68,7 @@ export default function main($root) {
         $('[data-score]').textContent = `${checkedWords.length}`;
     });
 
-    $('[data-move-index]').addEventListener('click', () => {
-        router.back();
-    });
+    $('[data-move-index]').addEventListener('click', router.back);
 
     $('[data-check-word]').addEventListener('click', () => {
         const { words, selected, checkedWords } = store.state;
@@ -80,7 +77,7 @@ export default function main($root) {
             selected: selected + 1,
             checkedWords: [
                 ...checkedWords, 
-                words[selected]
+                words[selected],
             ]
         });
     });

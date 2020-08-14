@@ -24,3 +24,7 @@ export function $$(selector, parent) {
 export function cx(...classList) {
     return classList.filter(Boolean).join(' ');
 }
+
+export function shuffleArray(array) {
+    return array.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
+}
