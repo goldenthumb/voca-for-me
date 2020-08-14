@@ -68,7 +68,10 @@ export default function main($root) {
         $('[data-score]').textContent = `${checkedWords.length}`;
     });
 
-    $('[data-move-index]').addEventListener('click', router.back);
+    $('[data-move-index]').addEventListener('click', () => {
+        store.clear();
+        router.back();
+    });
 
     $('[data-check-word]').addEventListener('click', () => {
         const { words, selected, checkedWords } = store.state;
